@@ -1,0 +1,66 @@
+cc_library {
+    name: "libgpiod",
+    host_supported: true,
+    vendor_available: true,
+    vndk: {
+        enabled: false,
+    },
+    srcs: [
+        "lib/core.c",
+        "lib/ctxless.c",
+        "lib/helpers.c",
+        "lib/iter.c",
+        "lib/misc.c",
+    ],
+    cflags: ["-Werror", "-Wno-macro-redefined", "-D_GNU_SOURCE"],
+    export_include_dirs: ["include"],
+    local_include_dirs: ["include"],
+
+    target: {
+        darwin: {
+            enabled: false,
+        },
+    },
+}
+
+cc_binary {
+    name: "gpiodetect",
+    srcs: ["tools/gpiodetect.c","tools/tools-common.c"],
+    shared_libs: ["libgpiod"],
+    cflags: ["-Werror","-D_GNU_SOURCE"],
+}
+
+cc_binary {
+    name: "gpiofind",
+    srcs: ["tools/gpiofind.c","tools/tools-common.c"],
+    shared_libs: ["libgpiod"],
+    cflags: ["-Werror","-D_GNU_SOURCE"],
+}
+
+cc_binary {
+    name: "gpioget",
+    srcs: ["tools/gpioget.c","tools/tools-common.c"],
+    shared_libs: ["libgpiod"],
+    cflags: ["-Werror", "-Wall","-D_GNU_SOURCE"],
+}
+
+cc_binary {
+    name: "gpioinfo",
+    srcs: ["tools/gpioinfo.c","tools/tools-common.c"],
+    shared_libs: ["libgpiod"],
+    cflags: ["-Werror","-D_GNU_SOURCE"],
+}
+
+cc_binary {
+    name: "gpiomon",
+    srcs: ["tools/gpiomon.c","tools/tools-common.c"],
+    shared_libs: ["libgpiod"],
+    cflags: ["-Werror","-D_GNU_SOURCE"],
+}
+
+cc_binary {
+    name: "gpioset",
+    srcs: ["tools/gpioset.c","tools/tools-common.c"],
+    shared_libs: ["libgpiod"],
+    cflags: ["-Werror","-D_GNU_SOURCE"],
+}

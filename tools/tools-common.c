@@ -19,6 +19,13 @@
 
 #include "tools-common.h"
 
+// Since program_invocation_name, program_invocation_short_name - obtain
+// name used to invoke calling program which is not available for android
+// aosp . In order for the tools to compile and work we are just defining
+// them here.
+static const char* program_invocation_name = "\0";
+static const char* program_invocation_short_name = "\0";
+
 const char *get_progname(void)
 {
 	return program_invocation_name;
